@@ -10,7 +10,7 @@ body {
     font-size: 70px;
     position: absolute;
     z-index: 10;
-    top: 50px;
+    top: 40px;
     left: 100px;
     color: #333333;
     text-transform: uppercase;
@@ -24,7 +24,7 @@ body {
         position: absolute;
         z-index: 10;
         left: 100px;
-        top: 160px;
+        top: 120px;
         border-radius: 30px;
 }
 
@@ -35,6 +35,50 @@ body {
     padding-left: 20px;
     padding-right: 20px;
     flex: 1;
+}
+.type{
+    margin-left: 20px;
+    width: fit-content;
+    backdrop-filter: brightness(0.25);
+    border-radius: 6px;
+    display: flex;
+    flex-wrap: nowrap;
+    font-size: 20px;
+    font-weight: 600;
+    color: #979797;
+    padding-bottom: 4px;
+    margin-top: 2px;
+    padding-right: 4px;
+    height: 40px;
+}
+.filterBtn {
+    border-radius: 30%;
+    font-size: 22px;
+    cursor: pointer;
+    margin-left: 6px;
+    background-color: rgb(72, 101, 72);
+}
+.filterBtn:hover {background-color: #3e8e41}
+
+.filterBtn:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.capacity {
+    background-color: rgb(59, 59, 59);
+    backdrop-filter: brightness(0.25);
+    font-size: 14px;
+    font-weight: 500;
+    color: #979797;
+    text-decoration: none;
+}
+.type > div{
+    align-items: stretch;
+    padding: 12px;
+}
+.capacity >option {
+    backdrop-filter: brightness(0.4);
 }
 #zip-code{
     flex: 1;
@@ -58,16 +102,17 @@ body {
     border-radius: 30px;
     bottom: 20px;
     padding-bottom: 30px;
-    overflow-y: scroll;
+    overflow-y: auto;
     backdrop-filter: blur(10px);
     /* font-weight: 500; */
-    /* border-radius: 8px; */
+    border-radius: 8px; 
 }
 
 .info-window{
     min-width: 300px;
     font-size: 18px;
     padding: 8px;
+    background: unset;
 }
 .stations-name{
     font-size: 24px;
@@ -91,12 +136,12 @@ body {
     background-color: #1985A1;
     display: flex;
     justify-content: center;
-    align-items: row;
+    align-items: center;
     border-radius: 50%;
     color: white;
     margin-right: 8px;
 }
-.stations-phone a, .stations-address{
+.stations-phone a, .stations-address a{
     text-decoration: none;
     color: #514C4C;
 }

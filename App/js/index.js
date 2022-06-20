@@ -1,7 +1,8 @@
  var map;
- var ramaiah = {lat: 34.063380, lng: -118.358080};
+ var ramaiah = {lat: 12.9507, lng: 77.5848};
  var infoWindow ;
  var markers = [];
+ var fStations = [];
 function initMap(){
     map = new google.maps.Map(document.getElementById('map'), {
          center: ramaiah,
@@ -38,6 +39,7 @@ function initMap(){
             throw new Error(response.status);
     }).then((data)=>{
         if(data.length> 0){
+            fStations= data;
             clearLocations();
             searchLocationNear(data);
             setStoreList(data);
@@ -62,6 +64,7 @@ function initMap(){
             throw new Error(response.status);
     }).then((data)=>{
         if(data.length> 0){
+            fStations=data;
             clearLocations();
             searchLocationNear(data);
             setStoreList(data);
@@ -138,22 +141,24 @@ const noStationsFound = () => {
         let address = station.addressLines[0];
         let phone = station.phoneNumber;
         let openStatusText = station.openStatusText;
+        let lng1 =station.location.coordinates[1];
+        let lat1=station.location.coordinates[0];
         bounds.extend(latlng);
-        createMarker(latlng, name, address, openStatusText, phone, index+1);
+        createMarker(latlng, name, address, openStatusText, phone, lng1,lat1,index+1);
     });
     map.fitBounds(bounds);
  }
 
- const createMarker = (latlng, name, address,openStatusText, phone,stationNumber) =>{
+ const createMarker = (latlng, name, address,openStatusText, phone,lng1,lat1,stationNumber) =>{
     let html = `
         <div class="info-window">
-            <div class="store-name">${name}</div>
+            <div class="station-name">${name}</div>
             <div class="open-status">${openStatusText}</div>
-            <div class="store-address">
+            <div class="stations-address">
             <div class="icon"><i class="fa-solid fa-location-crosshairs"></i></div>
-            <span>${address}</span>
+            <span><a href="https://www.google.com/maps/dir/?api=1&origin=${ramaiah.lat},${ramaiah.lng}&destination=${lng1},${lat1}" target="_blank">${address}</a></span>
             </div>
-            <div class="store-phone">
+            <div class="stations-phone">
             <div class="icon"><i class="fa-solid fa-phone"></i></div>
             <span><a href="tel:${phone}">${phone}</span>
             </div>
@@ -171,7 +176,7 @@ const noStationsFound = () => {
     markers.push(marker);
  };
 
- const currLocation = ()=> {
+const currLocation = ()=> {
     if(navigator.geolocation)
                 navigator.geolocation.getCurrentPosition(function(position){
                     let curr = {lat:position.coords.latitude,lng:position.coords.longitude}
@@ -179,8 +184,22 @@ const noStationsFound = () => {
                     currStations();
                     initMap();
                 });
- };
+};
 
+const captype=() => {
+    var e = document.getElementById("capId");
+    var opt = e.options[e.selectedIndex].value;
+    var arrayStation = [];
+    fStations.forEach((station)=>{
+        if(station.type[0] == opt){
+            arrayStation.push(station);
+        }
+        clearLocations();
+        searchLocationNear(arrayStation);
+        setStoreList(arrayStation);
+        setOnClickListener();
+    });
+};
  
 
  

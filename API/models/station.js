@@ -3,6 +3,7 @@ const stationSchema = mongoose.Schema({
     stationName: String,
     phoneNumber: String,
     address: {},
+    type:{},
     openStatusText: String,
     addressLines: Array,
     location: {

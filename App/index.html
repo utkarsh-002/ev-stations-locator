@@ -17,6 +17,15 @@
             <input id="zip-code" type="text" onkeyup="onEnter(event)" placeholder="Enter zip"/>
             <i class="fa-solid fa-magnifying-glass-location" onclick="getStations()"></i>
         </div>
+        <div class="type">
+            <div ><label for="ev" id="capLabel">Power Capacity:</label></div>
+            <select name="ev" class="capacity" id="capId">
+                <option value="rapid">RAPID Charger</option>
+                <option value="fast">FAST Charger</option>
+                <option value="slow">SLOW Chargers</option>
+            </select>
+            <div class="filterBtn"><i class="fa-solid fa-filter" onclick="captype()"></i></div>
+        </div>
     </div>
     <div class="station-container">
         <div class="stations-list">

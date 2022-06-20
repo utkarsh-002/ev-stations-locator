@@ -37,7 +37,6 @@ app.get('/api/stations',(req,res)=> {
                 if(err)
                 res.status(500).send(err);
             else{
-                console.log(coordinates);
                 res.status(200).send(stations);
             }
             })
@@ -61,7 +60,6 @@ app.get('/api/currStations',(req,res)=> {
          if(err)
          res.status(500).send(err);
      else{
-        console.log(stations);
          res.status(200).send(stations);
       }
      })
@@ -78,6 +76,7 @@ app.post('/api/stations',(req,res)=>{
             stationName: station.stationName,
             phoneNumber: station.phoneNumber,
             address: station.address,
+            type: station.type,
             openStatusText: station.openStatusText,
             addressLines: station.addressLines,
             location: {
