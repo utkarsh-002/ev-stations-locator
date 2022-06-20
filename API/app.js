@@ -37,6 +37,7 @@ app.get('/api/stations',(req,res)=> {
                 if(err)
                 res.status(500).send(err);
             else{
+                console.log(coordinates);
                 res.status(200).send(stations);
             }
             })
@@ -44,6 +45,28 @@ app.get('/api/stations',(req,res)=> {
             console.log(error)
         })
 })
+
+app.get('/api/currStations',(req,res)=> {
+    Station.find({
+        location: {
+            $near: {
+                $maxDistance: 35000,
+                 $geometry: {
+                    type: "Point",
+                    coordinates: [req.query.longitude, req.query.latitude]
+                }
+            }
+        }
+     }).find((err, stations)=>{
+         if(err)
+         res.status(500).send(err);
+     else{
+        console.log(stations);
+         res.status(200).send(stations);
+      }
+     })
+        
+});
 
 app.listen(port, () => console.log(`App listening at http://localhost:${port}`))
 

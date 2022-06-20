@@ -31,6 +31,31 @@ function initMap(){
     const API_URL = 'http://localhost:3000/api/stations';
     const fullUrl = `${API_URL}?zip_code=${zipCode}`;
     fetch(fullUrl).then((response)=>{
+        if(response.status == 200){
+            return response.json();
+        }
+        else
+            throw new Error(response.status);
+    }).then((data)=>{
+        if(data.length> 0){
+            clearLocations();
+            searchLocationNear(data);
+            setStoreList(data);
+            setOnClickListener();
+        }
+        else{
+            clearLocations();
+            noStationsFound();
+        }
+        
+    })
+ }
+
+ const currStations = ()=>{
+    const API_URL = 'http://localhost:3000/api/currStations';
+    let coordinates = ramaiah;
+    const fullUrl = `${API_URL}?longitude=${coordinates.lng}&latitude=${coordinates.lat}`;
+    fetch(fullUrl).then((response)=>{
         if(response.status == 200)
             return response.json();
         else
@@ -48,7 +73,7 @@ function initMap(){
         }
         
     })
- }
+ };
 
 const clearLocations = () =>{
     infoWindow.close();
@@ -151,6 +176,11 @@ const noStationsFound = () => {
                 navigator.geolocation.getCurrentPosition(function(position){
                     let curr = {lat:position.coords.latitude,lng:position.coords.longitude}
                     ramaiah = curr;
+                    currStations();
                     initMap();
                 });
  };
+
+ 
+
+ 
