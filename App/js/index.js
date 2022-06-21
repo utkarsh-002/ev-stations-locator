@@ -162,6 +162,9 @@ const noStationsFound = () => {
             <div class="icon"><i class="fa-solid fa-phone"></i></div>
             <span><a href="tel:${phone}">${phone}</span>
             </div>
+            <div class="stations-reserve">
+            <div class="icon"><i class="fas fa-shuttle-van"></i></div>
+            <span><a href="#">Slots registered<a></span>
         </div>
     `;
   var marker = new google.maps.Marker({
@@ -192,6 +195,7 @@ const captype=() => {
     var arrayStation = [];
     fStations.forEach((station)=>{
         if(station.type[0] == opt){
+            console.log("inside catype")
             arrayStation.push(station);
         }
         clearLocations();

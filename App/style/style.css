@@ -125,12 +125,12 @@ body {
     padding-bottom: 8px;
     color: rgba(0,0,0,.57);
 }
-.stations-address, .stations-phone{
+.stations-address, .stations-phone, .stations-reserve{
     margin-top: 8px;
     display: flex;
     align-items: center;
 }
-.stations-address .icon, .stations-phone .icon {
+.stations-address .icon, .stations-phone .icon, .stations-reserve .icon {
     width: 30px;
     height: 30px;
     background-color: #1985A1;
@@ -141,7 +141,7 @@ body {
     color: white;
     margin-right: 8px;
 }
-.stations-phone a, .stations-address a{
+.stations-phone a, .stations-address a, .stations-reserve a{
     text-decoration: none;
     color: #514C4C;
 }

@@ -19,12 +19,12 @@
         </div>
         <div class="type">
             <div ><label for="ev" id="capLabel">Power Capacity:</label></div>
-            <select name="ev" class="capacity" id="capId">
+            <select name="ev" class="capacity" id="capId" onchange="captype()">
+                <option value="" selected disabled hidden>Choose type</option>
                 <option value="rapid">RAPID Charger</option>
                 <option value="fast">FAST Charger</option>
                 <option value="slow">SLOW Chargers</option>
             </select>
-            <div class="filterBtn"><i class="fa-solid fa-filter" onclick="captype()"></i></div>
         </div>
     </div>
     <div class="station-container">
