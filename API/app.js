@@ -5,9 +5,9 @@ const port = 3000;
 const axios = require('axios');
 const Station = require('./models/station');
 const GoogleMapsService = require('./services/googleMapsServices');
+const { application } = require('express');
 const googleMapsServices = new GoogleMapsService();
 require('dotenv').config();
-
 app.use(function(req,res,next){
     res.header('Access-Control-Allow-Origin',"*");
     next();
@@ -66,7 +66,26 @@ app.get('/api/currStations',(req,res)=> {
         
 });
 
-app.listen(port, () => console.log(`App listening at http://localhost:${port}`))
+app.get('/api/distRange',(req,res)=>{
+    let range = req.query.range;
+    Station.find({
+        location: {
+            $near: {
+                $maxDistance: range,
+                 $geometry: {
+                    type: "Point",
+                    coordinates: [req.query.longitude, req.query.latitude]
+                }
+            }
+        }
+     }).find((err, stations)=>{
+         if(err)
+         res.status(500).send(err);
+     else{
+         res.status(200).send(stations);
+      }
+     })
+});
 
 app.post('/api/stations',(req,res)=>{
     var dbstations = [];
@@ -103,3 +122,5 @@ app.delete('/api/stations',(req,res)=>{
         res.status(200).send(err);
     })
 })
+
+app.listen(port, () => console.log(`App listening at http://localhost:${port}`))

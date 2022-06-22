@@ -37,7 +37,6 @@ body {
     flex: 1;
 }
 .type{
-    margin-left: 20px;
     width: fit-content;
     backdrop-filter: brightness(0.25);
     border-radius: 6px;
@@ -50,20 +49,6 @@ body {
     margin-top: 2px;
     padding-right: 4px;
     height: 40px;
-}
-.filterBtn {
-    border-radius: 30%;
-    font-size: 22px;
-    cursor: pointer;
-    margin-left: 6px;
-    background-color: rgb(72, 101, 72);
-}
-.filterBtn:hover {background-color: #3e8e41}
-
-.filterBtn:active {
-  background-color: #3e8e41;
-  box-shadow: 0 5px #666;
-  transform: translateY(4px);
 }
 .capacity {
     background-color: rgb(59, 59, 59);
@@ -79,6 +64,14 @@ body {
 }
 .capacity >option {
     backdrop-filter: brightness(0.4);
+    background: center;
+}
+#quantity {
+    background: center;
+    color:#979797;
+    font-size: 20px;
+    font-weight: 700;
+    width: 40px;
 }
 #zip-code{
     flex: 1;

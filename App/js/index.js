@@ -78,6 +78,31 @@ function initMap(){
     })
  };
 
+ const distRange = () => {
+    let dist = document.getElementById("quantity").value * 1000;
+    let coordinates = ramaiah;
+    const API_URL = 'http://localhost:3000/api/distRange';
+    const fullUrl = `${API_URL}?range=${dist}&longitude=${coordinates.lng}&latitude=${coordinates.lat}`;
+    fetch(fullUrl).then((response)=>{
+        if(response.status == 200)
+            return response.json();
+        else
+            throw new Error(response.status);
+    }).then((data)=>{
+        if(data.length> 0){
+            fStations=data;
+            clearLocations();
+            searchLocationNear(data);
+            setStoreList(data);
+            setOnClickListener();
+        }
+        else{
+            clearLocations();
+            noStationsFound();
+        }
+    })
+ };
+
 const clearLocations = () =>{
     infoWindow.close();
     for(var i =0;i<markers.length;i++){
@@ -164,7 +189,7 @@ const noStationsFound = () => {
             </div>
             <div class="stations-reserve">
             <div class="icon"><i class="fas fa-shuttle-van"></i></div>
-            <span><a href="#">Slots registered<a></span>
+            <span><a href="#">Slots availabel<a></span>
         </div>
     `;
   var marker = new google.maps.Marker({
@@ -185,6 +210,16 @@ const currLocation = ()=> {
                     let curr = {lat:position.coords.latitude,lng:position.coords.longitude}
                     ramaiah = curr;
                     currStations();
+                    initMap();
+                });
+};
+
+const currRange = ()=> {
+    if(navigator.geolocation)
+                navigator.geolocation.getCurrentPosition(function(position){
+                    let curr = {lat:position.coords.latitude,lng:position.coords.longitude}
+                    ramaiah = curr;
+                    distRange();
                     initMap();
                 });
 };

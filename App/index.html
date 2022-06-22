@@ -18,13 +18,15 @@
             <i class="fa-solid fa-magnifying-glass-location" onclick="getStations()"></i>
         </div>
         <div class="type">
-            <div ><label for="ev" id="capLabel">Power Capacity:</label></div>
+            <div ><label for="ev" id="capLabel">Capacity:</label></div>
             <select name="ev" class="capacity" id="capId" onchange="captype()">
                 <option value="" selected disabled hidden>Choose type</option>
                 <option value="rapid">RAPID Charger</option>
                 <option value="fast">FAST Charger</option>
                 <option value="slow">SLOW Chargers</option>
             </select>
+            <div ><label for="ev1" id="distLabel">Range:</label></div>
+                <input type="number" id="quantity" value="35" name="quantity" min="5" max="45" step="5" onchange="currRange()">
         </div>
     </div>
     <div class="station-container">
